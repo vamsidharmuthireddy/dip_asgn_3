@@ -1,14 +1,14 @@
-function img_out = restore_turb(img_in,k1,k2,bx,by)
+function img_out = restore_motion(img_in,k1,T,a,b)
 [r,c,ch] = size(img_in);
 
-psf_turb = give_turb_psf(r,c,k2,bx,by);
-psf = psf_turb;
+psf_motion = give_motion_psf(r,c,T,a,b);
+psf = psf_motion;
 
 psf_abs = abs(psf);
 psf_conj = conj(psf);
 
 % figure;imshow((psf_abs),[]);
-figure;imshow(fftshift(psf_abs),[]);
+% figure;imshow(fftshift(psf_abs),[]);
 % surf([-c/2+1:c/2]/(c/2),[-r/2+1:r/2]/(r/2),fftshift(psf_abs))
 % shading interp, camlight, colormap jet
 % xlabel('PSF FFT magnitude')
@@ -28,8 +28,9 @@ img_out = real(ifft2(temp));
 
 end
 
-function psf_turb = give_turb_psf(r,c,k1,bx,by)
-psf_turb = zeros([r,c]);
+
+function psf_motion = give_motion_psf(r,c,T,a,b)
+psf_motion = zeros([r,c]);
 for y=1:r
     for x=1:c
         if(y <= round(r/2))
@@ -47,10 +48,12 @@ for y=1:r
                 u = c - x + 1;
             end
         end
-        pow = -k1*( ( (v/by)^2 + (u/bx)^2 )/2 )^(5/6);
-        psf_turb(y,x) = exp(pow);
+
+        pr = pi*(u*a + v*b);
+        c1 = T/pr;
+        c2 = sin(pr);
+        c3 = exp(-2*pr);
+        psf_motion(y,x) = c1*c2*c3;
     end
 end
 end
-
-

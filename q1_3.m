@@ -13,7 +13,7 @@ out_turb = restore_turb(in,k1,k2);
 T=1;
 a=1e-8 ;
 b=0.004;
-out_motion = restore_motion(in,k1,T,a,b);
+out_motion = restore_weiner(in,k1,T,a,b);
 
 len=10;
 theta=0;

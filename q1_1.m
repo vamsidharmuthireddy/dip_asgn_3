@@ -13,10 +13,16 @@ out_turb = restore_turb(in,k1,k2);
 T=1;
 a=1e-8 ;
 b=0.004;
-out_motion = restore_motion(in,k1,T,a,b);
+out_motion = restore_weiner(in,k1,T,a,b);
+WEIGHT = edge(in,'sobel');
+% se = strel('disk',2);
+% WEIGHT = 1-double(imdilate(WEIGHT,se));
+% WEIGHT([1:3 end-(0:2)],:) = 0;
+% WEIGHT(:,[1:3 end-(0:2)]) = 0;
+% figure; imshow(WEIGHT); title('Weight array');
 
-len=10;
-theta=0;
+len=5;
+theta=60;
 out_motion_2 = restore_motion_2(in,k1,len,theta);
 
 
