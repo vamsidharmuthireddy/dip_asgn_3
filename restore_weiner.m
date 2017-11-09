@@ -7,7 +7,7 @@ psf = psf_motion;
 psf_abs = abs(psf);
 psf_conj = conj(psf);
 
-% figure;imshow((psf_abs),[]);
+figure;imshow(real(ifft2(psf)),[]);
 % figure;imshow(fftshift(psf_abs),[]);
 % surf([-c/2+1:c/2]/(c/2),[-r/2+1:r/2]/(r/2),fftshift(psf_abs))
 % shading interp, camlight, colormap jet

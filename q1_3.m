@@ -8,7 +8,9 @@ in = im2double(in);
 k1=0.01;
 
 k2=0.0025;
-out_turb = restore_turb(in,k1,k2);
+bx=2;
+by=0.8;
+out_turb = restore_turb(in,k1,k2,bx,by);
 
 T=1;
 a=1e-8 ;

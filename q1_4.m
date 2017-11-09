@@ -7,7 +7,9 @@ in = im2double(in);
 
 k1=0.04;
 k2=0.001;
-out_turb = restore_turb(in,k1,k2);
+bx=0.45;
+by=0.45;
+out_turb = restore_turb(in,k1,k2,bx,by);
 
 k1=0.01;
 T=1;
@@ -34,4 +36,6 @@ subplot(2,2,3);imshow(out_motion,[]);title('motion');
 subplot(2,2,4);imshow(out_motion_2,[]);title('inbuilt');
 % figure,imshow(out);
 
+out = restore_temp(in);
+figure,imshow(out,[]);
 
